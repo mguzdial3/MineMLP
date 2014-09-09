@@ -1,0 +1,5 @@
+NPC Enemies List 3
+NPC 0000 Movement 24 -0.6595799 -46  Appearance 6 
+NPC 0001 Movement -4 -0.6595799 -71  Appearance 2 
+NPC 0002 Movement 99 -0.6595799 -62  Appearance 1 
+

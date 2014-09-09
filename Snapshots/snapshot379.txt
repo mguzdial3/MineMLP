@@ -1,0 +1,32 @@
+NPC Enemies List 30
+NPC 0000 Movement 93 -159.0023 -19  Appearance 6 
+NPC 0001 Movement -19.59073 6.999999 21.73309 -24 6 21  Appearance 3 
+NPC 0002 Movement -22.94637 7 21.07113 -24 6 21  Appearance 5 
+NPC 0003 Movement -19.59073 6.999999 21.73309 -24 6 21  Appearance 0 
+NPC 0004 Movement -18.04396 10.99996 -6.885597 -19 10 -6  Appearance 0 
+NPC 0005 Movement -90 -159.0023 -90  Appearance 1 
+NPC 0006 Movement -22.94638 7 21.07113 -24 6 21  Appearance 1 
+NPC 0007 Movement -18.04396 10.99996 -6.885597 -19 10 -6  Appearance 5 
+NPC 0008 Movement -34 -159.0023 68  Appearance 4 
+NPC 0009 Movement -86 -159.0023 -40  Appearance 4 
+NPC 0010 Movement -17.57895 11.01766 -7.202176 -16 11 -3  Appearance 0 
+NPC 0011 Movement -19.0366 6.999999 21.82561 -24 6 21  Appearance 3 
+NPC 0012 Movement -82 -159.0023 15  Appearance 4 
+NPC 0013 Movement -87 -159.0023 -90  Appearance 1 
+NPC 0014 Movement 95 -159.0023 -20  Appearance 4 
+NPC 0015 Movement -20.61097 6.999999 21.56482 -24 6 21  Appearance 3 
+NPC 0016 Movement -5 -159.0023 -97  Appearance 5 
+NPC 0017 Movement -19.59072 6.999999 21.73309 -24 6 21  Appearance 3 
+NPC 0018 Movement -17.57895 11.01765 -7.202177 -16 11 -3  Appearance 0 
+NPC 0019 Movement 57 -159.0023 65  Appearance 4 
+NPC 0020 Movement -15 -159.0023 97  Appearance 2 
+NPC 0021 Movement -18.04396 10.99996 -6.885596 -19 10 -6  Appearance 1 
+NPC 0022 Movement 83 -159.0023 56  Appearance 4 
+NPC 0023 Movement 78 -159.0023 64  Appearance 5 
+NPC 0024 Movement -19.59072 6.999999 21.73309 -24 6 21  Appearance 3 
+NPC 0025 Movement -73 -159.0023 -45  Appearance 0 
+NPC 0026 Movement -36 -159.0023 97  Appearance 6 
+NPC 0027 Movement -19.59072 6.999999 21.73309 -24 6 21  Appearance 1 
+NPC 0028 Movement -17.57895 11.01765 -7.202177 -16 11 -3  Appearance 6 
+NPC 0029 Movement -19.59072 6.999999 21.73309 -24 6 21  Appearance 6 
+
