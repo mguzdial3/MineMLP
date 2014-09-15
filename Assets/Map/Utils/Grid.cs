@@ -8,13 +8,13 @@ public class Grid<T> {
 	private int minX, minY, minZ;
 	private int maxX, maxY, maxZ;
 
-	private const int MINIMUM_X = -7;
+	private const int MINIMUM_X = -5;
 	private const int MINIMUM_Y = 0;
-	private const int MINIMUM_Z = -7;
+	private const int MINIMUM_Z = -5;
 
-	private const int MAXIMUM_X = 7;
+	private const int MAXIMUM_X = 5;
 	private const int MAXIMUM_Y = 3;
-	private const int MAXIMUM_Z = 7;
+	private const int MAXIMUM_Z = 5;
 
 	
 	public Grid() {

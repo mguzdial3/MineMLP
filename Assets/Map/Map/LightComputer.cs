@@ -84,7 +84,7 @@ public class LightComputer {
 	
 	public static void SetLightDirty(Map map, int blockX, int blockY, int blockZ) {
 		ChunkData chunk = map.GetChunkData( Chunk.ToChunkPosition(blockX, blockY, blockZ) );
-		if( chunk != null && chunk.GetChunk() != null ) {
+		if( chunk != default(ChunkData) && chunk.GetChunk() != default(Chunk) ) {
 			chunk.GetChunk().SetLightDirty();
 		}
 	}

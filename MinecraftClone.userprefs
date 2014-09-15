@@ -2,21 +2,19 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Assets/Util/SnapshotHandler.cs">
     <Files>
-      <File FileName="Assets/Map/Map/Map.cs" Line="1" Column="1" />
+      <File FileName="Assets/Assets/Util/SnapshotHandler.cs" Line="258" Column="1" />
+      <File FileName="Assets/Map/Map/Map.cs" Line="34" Column="12" />
       <File FileName="Assets/Assets/NPC Assets/Scripts/NPCMovementController.cs" Line="1" Column="1" />
       <File FileName="Assets/Map/Generator/TerrainGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Utils/Grid.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Util/SnapshotHandler.cs" Line="264" Column="3" />
-      <File FileName="Assets/Map/Map/Chunk.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/NPC Assets/Scripts/NPCAppearanceHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Map/LightComputer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Map/Lightmap.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Builder/ChunkBuilder.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Data/Editor/BlockSetEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Assets/Util/NPCController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Data/Scripts/Block.cs" Line="1" Column="1" />
       <File FileName="Assets/Map/Data/Scripts/BlockSet.cs" Line="1" Column="1" />
-      <File FileName="Assets/Map/Generator/MapGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Map/Utils/Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets/Map/Map/LightComputer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Map/Map/ChunkData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scenes/Game/Scripts/GUI/PauseGUI.cs" Line="151" Column="35" />
+      <File FileName="Assets/Assets/Util/NPCController.cs" Line="47" Column="37" />
+      <File FileName="Assets/Assets/Player/Scripts/Builder.cs" Line="30" Column="1" />
+      <File FileName="Assets/Assets/NPC Assets/Scripts/NPCUnit.cs" Line="20" Column="1" />
+      <File FileName="Assets/Assets/NPC Assets/Scripts/NPCAppearanceHandler.cs" Line="55" Column="81" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Map/Map/Map.cs">
+    <Files>
+      <File FileName="Assets/Util/SnapshotHandler.cs" Line="109" Column="43" />
+      <File FileName="Map/Map/Map.cs" Line="50" Column="2" />
+      <File FileName="Assets/NPC Assets/Scripts/NPCMovementController.cs" Line="16" Column="13" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

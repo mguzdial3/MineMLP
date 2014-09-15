@@ -7,10 +7,33 @@ public class NPCUnit : MonoBehaviour {
 	public NPCAppearanceHandler appearanceController;
 
 
-	public string GetSaveString(){
+	public string GetSaveString(bool hasControl=false, Vector3 playerPos=default(Vector3)){
 		string saveString = SAVE_STRING+" " + gameObject.name+" ";
-		saveString += movementController.GetSaveString () + " ";
+		saveString += movementController.GetSaveString (hasControl,playerPos) + " ";
 		saveString += appearanceController.GetSaveString () + "\n";
 		return saveString;
 	}
+
+	public Color GetColor(){
+		return appearanceController.GetColor ();
+	}
+
+	public void SetInvisible(){
+		appearanceController.SetInvisible ();
+		movementController.SetPause (true);
+	}
+	
+	public void SetVisible(){
+		appearanceController.SetVisible ();
+		movementController.SetPause (false);
+	}
+
+	public Vector3 GetGoal(){
+		return movementController.GetGoal ();
+	}
+
+	public void SetCurrGoal(Vector3 goal){
+		movementController.SetCurrGoal (goal);
+	}
+
 }

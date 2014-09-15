@@ -5,7 +5,6 @@ public class NPCAppearanceHandler : MonoBehaviour {
 	public static string SAVE_STRING="Appearance";
 	public static string COLOR="Color";
 
-
 	public Transform headJoint;
 
 	private Quaternion bodyLookTarget;
@@ -18,6 +17,8 @@ public class NPCAppearanceHandler : MonoBehaviour {
 	public Renderer bodyRenderer;
 	private Color[] _colorOptions = {Color.gray, Color.red, Color.green, Color.blue, Color.yellow, Color.cyan, Color.magenta};
 	private int _colorIndex;
+
+
 
 	public void Init(){
 		headLookTarget = headJoint.rotation;
@@ -50,22 +51,37 @@ public class NPCAppearanceHandler : MonoBehaviour {
 	public void SetNewGoal(Vector3 goal){
 		Vector3 goalEvenY = goal;
 		goalEvenY.y = transform.position.y;
-
-		bodyLookTarget = Quaternion.LookRotation (goalEvenY - transform.position, Vector3.up);
+		if((goalEvenY-transform.position)!=Vector3.zero){
+			bodyLookTarget = Quaternion.LookRotation (goalEvenY - transform.position, Vector3.up);
+		}
 
 		if (goal.y != transform.position.y) {
-			headLookTarget = 	Quaternion.LookRotation (goal - headJoint.position, Vector3.up);	
+			if((goal-headJoint.position)!=Vector3.zero){
+				headLookTarget = Quaternion.LookRotation (goal - headJoint.position, Vector3.up);
+			}
 		}
 		else{
 			headLookTarget = bodyLookTarget;
 		}
-
-		
 	}
 
 	public string GetSaveString(){
 		string saveString = SAVE_STRING + " ";
 		saveString += _colorIndex+" ";
 		return saveString;
+	}
+
+	public Color GetColor(){
+		return _colorOptions[_colorIndex];
+	}
+
+	public void SetInvisible(){
+		bodyRenderer.enabled = false;
+		headJoint.gameObject.SetActive (false);
+	}
+
+	public void SetVisible(){
+		bodyRenderer.enabled = true;
+		headJoint.gameObject.SetActive (true);
 	}
 }

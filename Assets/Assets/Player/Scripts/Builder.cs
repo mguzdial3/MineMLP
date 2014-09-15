@@ -6,6 +6,8 @@ public class Builder : MonoBehaviour {
 	private Transform cameraTrans;
 	private Map map;
 	private Block selectedBlock;
+
+	private float _distanceOfRaycast=30f;
 	
 	void Awake() {
 		cameraTrans = transform.GetComponentInChildren<Camera>().transform;
@@ -19,6 +21,28 @@ public class Builder : MonoBehaviour {
 	public Block GetSelectedBlock() {
 		return selectedBlock;
 	}
+
+	public NPCMovementController TryGetSelectedNPC(){
+		RaycastHit hit;
+		NPCMovementController npcMovement = null;
+		if(Physics.Raycast(cameraTrans.position,cameraTrans.forward,out hit, _distanceOfRaycast)){//TODO; change number to variable
+			if(hit.collider!=null){
+				npcMovement = hit.collider.GetComponent<NPCMovementController>();
+			}
+		}
+
+		return npcMovement;
+	}
+
+	public Vector3 GetGoalPositionFromLook(){
+		RaycastHit hit;
+
+		if(Physics.Raycast(cameraTrans.position,cameraTrans.forward,out hit,_distanceOfRaycast)){//TODO; change number to variable
+			return hit.point;
+		}
+
+		return default(Vector3);
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +52,6 @@ public class Builder : MonoBehaviour {
 			Vector3i? point = GetCursor(false);
 			if(point.HasValue) {
 				byte light = map.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
-				Debug.Log("Light "+light);
 			}
 		}
 		
@@ -36,7 +59,6 @@ public class Builder : MonoBehaviour {
 			Vector3i? point = GetCursor(true);
 			if(point.HasValue) {
 				byte light = map.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
-				Debug.Log("Light "+light);
 			}
 		}
 		
@@ -79,7 +101,7 @@ public class Builder : MonoBehaviour {
 		}
 		return null;
 	}
-	
+
 	private static BlockDirection GetDirection(Vector3 dir) {
 		if( Mathf.Abs(dir.z) >= Mathf.Abs(dir.x) ) {
 			// 0 или 180
@@ -91,5 +113,5 @@ public class Builder : MonoBehaviour {
 			return BlockDirection.X_MINUS;
 		}
 	}
-	
+
 }

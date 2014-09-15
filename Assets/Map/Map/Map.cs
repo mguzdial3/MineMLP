@@ -146,13 +146,22 @@ public class Map : MonoBehaviour {
 	public void SetBlock(BlockData block, int x, int y, int z) {
 		ChunkData chunk = GetChunkDataInstance( Chunk.ToChunkPosition(x, y, z) );
 		if (chunk != null) {
-			chunk.SetBlock (block, Chunk.ToLocalPosition (x, y, z));
+
 			if(block.block!=null){
 				changeList.Add(""+x+" "+y+" "+z+" "+Array.IndexOf(TerrainGenerator.blockNames,block.block.GetName()));
 			}
 			else{
-				changeList.Add(""+x+" "+y+" "+z+" "+"-1");
+				BlockData data = GetBlock(x,y,z);
+
+				if(data.block!=null){
+					changeList.Add(""+x+" "+y+" "+z+" -"+(Array.IndexOf(TerrainGenerator.blockNames,data.block.GetName())));//So we can have negative zeroes
+				}
+				else{
+					changeList.Add(""+x+" "+y+" "+z+" ERROR");
+				}
 			}
+
+			chunk.SetBlock (block, Chunk.ToLocalPosition (x, y, z));
 		}
 	}
 
@@ -196,7 +205,7 @@ public class Map : MonoBehaviour {
 	} 
 
 	public Block GetBlockByIndex(int index){
-		return blockSet.GetBlock(TerrainGenerator.blockNames[index]);
+		return TerrainGenerator.blocks[index];
 	}
 
 	public BlockData GetBlock(int x, int y, int z) {

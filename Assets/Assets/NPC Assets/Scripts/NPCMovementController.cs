@@ -8,7 +8,7 @@ public class NPCMovementController : MonoBehaviour {
 	private Vector3 _currGoal;
 	private float _minDist= 1f;
 	public float speed = 5f;
-	public float maxDistance = 100f;
+	private float maxDistance = 30f;
 
 	private int maxChecksPerFrame = 100;
 
@@ -24,12 +24,11 @@ public class NPCMovementController : MonoBehaviour {
 	private const int PATHING = 0;
 	private const int ACTION = 1;
 
+	private bool pause;
+
 	//Appearance
 	public NPCAppearanceHandler appearanceHandler;
-
-	//Testing
-	private GameObject player;
-
+	
 	// Use this for initialization
 	public void Init () {
 		//Give it an initial random goal
@@ -39,54 +38,59 @@ public class NPCMovementController : MonoBehaviour {
 
 		transform.position = _map.getEmptyLOC (transform.position);
 
-		player = GameObject.FindGameObjectWithTag ("Player");
+		_currGoal = transform.position;
 	}
 
 	public void InitFromSave(Vector3 _location, Vector3[] _path){
 		transform.position = _location;
 		path = _path;
-		player = GameObject.FindGameObjectWithTag ("Player");
+
+		if(path==null){
+			_currGoal = transform.position;
+		}
 	}
-	
+
+	public void SetPause(bool _pause){
+		pause = _pause;
+	}
+
 	// Update is called once per frame
 
 	void Update () {
-		if (_map.IsPositionOpen (transform.position - Vector3.up )) {
-			transform.position-=Vector3.up*Time.deltaTime;
-		}
+		if(!pause){
+			if (_map.IsPositionOpen (transform.position - Vector3.up )) {
+				transform.position-=Vector3.up*Time.deltaTime;
+			}
 
-		//TESTING
+			if(currState==PATHING){
+					if (path == null) {
+						path = AStar(transform.position,_currGoal);
+						pathIndex = 0;
 
-		if(currState==PATHING){
-			if(player!=null){
-				if (path == null) {
-					path = AStar(transform.position,player.transform.position);
-					pathIndex = 0;
-
-					if(path!=null){
-						appearanceHandler.SetNewGoal(path[pathIndex]);
-					}
-				}
-				else{
-
-					//Are we done at this point
-					Vector3 distToNext = path[pathIndex]-transform.position;
-					distToNext+=Vector3.up;
-
-					if(distToNext.magnitude<_minDist){
-						pathIndex++;
-
-						if(pathIndex>=path.Length){
-							path=null;
-						}
-						else{
+						if(path!=null){
 							appearanceHandler.SetNewGoal(path[pathIndex]);
 						}
 					}
 					else{
-						transform.position+=distToNext.normalized*Time.deltaTime*speed;
+						//Are we done at this point
+						Vector3 distToNext = path[pathIndex]-transform.position;
+						distToNext+=Vector3.up;
+
+						if(distToNext.magnitude<_minDist){
+							pathIndex++;
+
+							if(pathIndex>=path.Length){
+								path=null;
+							}
+							else{
+								appearanceHandler.SetNewGoal(path[pathIndex]);
+							}
+						}
+						else{
+							transform.position+=distToNext.normalized*Time.deltaTime*speed;
+						}
 					}
-				}
+
 			}
 		}
 	}
@@ -139,6 +143,11 @@ public class NPCMovementController : MonoBehaviour {
 
 		}
 		return null;
+	}
+
+	public void SetCurrGoal(Vector3 goal){
+		path = null;
+		_currGoal = goal;
 	}
 
 	private Vector3[] GetPathFromNode(PathingNode goal){
@@ -211,15 +220,25 @@ public class NPCMovementController : MonoBehaviour {
 		_map = map;	
 	}
 
-	public string GetSaveString(){
+	public string GetSaveString(bool hasControl, Vector3 playerPos=default(Vector3)){
 		string saveString = SAVE_STRING + " ";
-		saveString += transform.position.x+" "+transform.position.y+" "+transform.position.z+" ";
-		if(path!=null){
-			for(int i = pathIndex; i<path.Length; i++){
-				saveString+=path[pathIndex].x+" "+path[pathIndex].y+" "+path[pathIndex].z+" ";
+		if(!hasControl){
+			saveString += transform.position.x+" "+transform.position.y+" "+transform.position.z+" ";
+
+			if(path!=null){
+				for(int i = pathIndex; i<path.Length; i++){
+					saveString+=path[pathIndex].x+" "+path[pathIndex].y+" "+path[pathIndex].z+" ";
+				}
 			}
+		}
+		else{
+			saveString += playerPos.x+" "+playerPos.y+" "+playerPos.z+" ";
 		}
 
 		return saveString;
+	}
+
+	public Vector3 GetGoal(){
+		return _currGoal;
 	}
 }

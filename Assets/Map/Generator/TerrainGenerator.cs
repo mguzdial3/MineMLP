@@ -11,33 +11,39 @@ public class TerrainGenerator {
 	private PerlinNoise3D noise3d = new PerlinNoise3D(1/30f);
 	
 	private Map map;
-	
-	private Block lava;
-	
-	private Block grass;
-	private Block dirt;
-	private Block sand;
-	private Block stone;
-	
-	private Block snow;
 
 	//Name
-	public static readonly string[] blockNames = new string[]{"Lava", "Grass", "Dirt", "Sand", "Stone", "Snow"};
-
+	public static readonly string[] blockNames = new string[] {
+				"Lava",
+				"Grass",
+				"Dirt",
+				"Sand",
+				"Stone",
+				"Snow",
+				"Water",
+				"Leaves",
+				"Trunk Tree",
+				"TNT",
+				"Brick",
+				"Pumpkin",
+				"PumpkinLit",
+				"Fungus",
+				"Fungus2",
+				"Fire"
+		};
+	public static Block[] blocks;
 
 
 	public TerrainGenerator(Map map) {
 		this.map = map;
+
+		blocks = new Block[blockNames.Length];
 		BlockSet blockSet = map.GetBlockSet();
-		
-		lava = blockSet.GetBlock(blockNames[0]);
-		
-		grass = blockSet.GetBlock(blockNames[1]);
-		dirt = blockSet.GetBlock(blockNames[2]);
-		sand = blockSet.GetBlock(blockNames[3]);
-		stone = blockSet.GetBlock(blockNames[4]);
-		
-		snow = blockSet.GetBlock(blockNames[5]);
+
+		for (int i = 0; i<blockNames.Length; i++) {
+			blocks[i] = blockSet.GetBlock(blockNames[i]);		
+		}
+
 	}
 
 
@@ -106,18 +112,18 @@ public class TerrainGenerator {
 	}
 	
 	private Block GetBlock(int worldX, int worldY, int worldZ, int deep) {
-		if(deep == 0) return grass;
-		if(deep <= 5) return dirt;
-		return stone;
+		if(deep == 0) return blocks[1];
+		if(deep <= 5) return blocks[2];
+		return blocks[4];
 	}
 
 	private Block GetBlockFancy(int worldX, int worldY, int worldZ, int deep) {
-		if(worldY == WATER_LEVEL+1) return sand;
-		if (worldY <= WATER_LEVEL) return lava;
-		if(worldY>ICE_LEVEL && deep==0) return snow;
-		if(deep == 0) return grass;
-		if(deep <= 5 && deep>0) return dirt;
-		return stone;
+		if(worldY == WATER_LEVEL+1) return blocks[3];
+		if (worldY <= WATER_LEVEL) return blocks[0];
+		if(worldY>ICE_LEVEL && deep==0) return blocks[5];
+		if(deep == 0) return blocks[1];
+		if(deep <= 5 && deep>0) return blocks[2];
+		return blocks[4];
 	}
 	
 }
