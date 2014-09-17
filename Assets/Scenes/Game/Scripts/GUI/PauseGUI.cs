@@ -123,7 +123,7 @@ public class PauseGUI : MonoBehaviour {
 
 				snapshotHandler.SetCurrentSnapshotNumber(currentSnapshotNumber);
 				snapshotHandler.SetCurrentMapNumber(snapshotHandler.GetCurrMap());
-				snapshotHandler.SpecialLoad(""+currentSnapshotNumber);
+				snapshotHandler.LoadNPCS(""+currentSnapshotNumber);
 			}
 		}
 
@@ -148,7 +148,7 @@ public class PauseGUI : MonoBehaviour {
 			}
 			snapshotHandler.SetCurrentSnapshotNumber(currentSnapshotNumber);
 			snapshotHandler.SetCurrentMapNumber(snapshotHandler.GetCurrMap());
-			snapshotHandler.SpecialLoad(""+currentSnapshotNumber);
+			snapshotHandler.LoadNPCS(""+currentSnapshotNumber);
 			
 		}
 
