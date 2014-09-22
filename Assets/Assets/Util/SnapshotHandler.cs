@@ -21,7 +21,7 @@ public class SnapshotHandler : MonoBehaviour {
 	private const string MAP_UPDATE_SAVE = "MapUpdateSave";
 	private const string MAP_UPDATE_SAVE_NUMBER = "MapUpdateSaveNumber";
 
-	private const string START_OF_TEXT ="/Users/matthewguzdial/MinecraftClone/Snapshots/snapshot";
+	private const string START_OF_TEXT ="/Users/mguzdial/MineMLP/Snapshots/snapshot";
 	private const string END_OF_TEXT =".txt";
 
 	private int frames=0;
@@ -423,6 +423,21 @@ public class SnapshotHandler : MonoBehaviour {
 			}
 		}
 		
+		//Lighting
+		for(int i = map.GetMinX(); i<map.GetMaxX(); i++){
+			for(int j = map.GetMinZ(); j<map.GetMaxZ(); j++){
+				LightComputer.ComputeSolarLighting(map,i,j);
+				LightComputer.SetLightDirty(map,i,0,j);
+			}
+			
+		}
+	}
+
+	public void LoadNPCS(string snapshotName){
+		npcController.DestroyAllNPCs ();
+
+		Load (snapshotName);
+
 		//Lighting
 		for(int i = map.GetMinX(); i<map.GetMaxX(); i++){
 			for(int j = map.GetMinZ(); j<map.GetMaxZ(); j++){
