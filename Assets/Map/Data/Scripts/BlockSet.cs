@@ -71,6 +71,21 @@ public class BlockSet : MonoBehaviour {
 		}
 		return null;
 	}
+
+	public string[] GetStringArray(){
+		string[] toReturn = new string[cubes.Count+crosses.Count];
+		int index = 0;
+		foreach(Block block in cubes) {
+			toReturn[index] = block.GetName();
+			index++;
+		}
+		foreach(Block block in crosses) {
+			toReturn[index] = block.GetName();
+			index++;
+		}
+
+		return toReturn;
+	}
 	
 	public int GetCount() {
 		return cubes.Count + crosses.Count;

@@ -10,10 +10,14 @@ public class MapGenerator : MonoBehaviour {
 	private Map map;
 	private Grid<Chunk2D> map2D = new Grid<Chunk2D>();
 	private TerrainGenerator terrainGenerator;
+	private SubmarineGenerator submarineGenerator;
+
+	private const int ROOM_SIZE=2;//radius
 	
 	void Awake() {
 		map = GetComponent<Map>();
 		terrainGenerator = new TerrainGenerator(map);
+		submarineGenerator = new SubmarineGenerator (map);
 	}
 
 	public void SpawnMap(){
@@ -27,6 +31,57 @@ public class MapGenerator : MonoBehaviour {
 			GenerateColumn(cx, cz);
 			LightComputer.Smooth(map, cx, cz);
 			BuildColumn(cx, cz);
+		}
+
+	}
+
+	public void SpawnSubmarine(){
+
+		//This does the floor
+		for (int i =-1*ROOM_SIZE; i<ROOM_SIZE; i++) {
+			for (int j =-1*ROOM_SIZE; j<ROOM_SIZE; j++) {
+				Vector3i current = Chunk.ToChunkPosition(i, 0,j );
+
+				int cx = current.x;
+				int cz = current.z;
+
+				GenerateSubFloor(cx,cz);
+				LightComputer.Smooth(map, cx, cz);
+				BuildColumn(cx,cz);
+
+			}		
+		}
+
+		//Walls
+		for (int i = -Chunk.SIZE_X; i<Chunk.SIZE_X; i++) {
+			submarineGenerator.GenerateWall(i,-Chunk.SIZE_Z);
+			submarineGenerator.GenerateWall(i,Chunk.SIZE_Z-1);
+
+			if(Math.Abs(i)!=8){
+				submarineGenerator.GenerateWall(i,0);
+			}
+		}
+
+		for (int i = -Chunk.SIZE_Z; i<Chunk.SIZE_Z; i++) {
+			submarineGenerator.GenerateWall(-Chunk.SIZE_X,i);
+			submarineGenerator.GenerateWall(Chunk.SIZE_X-1,i);
+
+			if(Math.Abs(i)!=8){
+				submarineGenerator.GenerateWall(0,i);
+			}
+		}
+
+		//Generate some random radioactivity
+
+		int numRandomRadioactive = 8;
+
+		while (numRandomRadioactive>0) {
+			int x = UnityEngine.Random.Range(-Chunk.SIZE_X,Chunk.SIZE_X);
+			int z = UnityEngine.Random.Range(-Chunk.SIZE_Z,Chunk.SIZE_Z);
+
+			submarineGenerator.GenerateRadioactive(x,2,z);
+
+			numRandomRadioactive--;	
 		}
 
 
@@ -56,6 +111,13 @@ public class MapGenerator : MonoBehaviour {
 	private void GenerateColumn(int cx, int cz) {
 		if( GetChunk2D(cx, cz).genereted ) return;
 		terrainGenerator.Generate(cx, cz);
+		LightComputer.ComputeSolarLighting(map, cx, cz);
+		GetChunk2D(cx, cz).genereted = true;
+	}
+
+	private void GenerateSubFloor(int cx, int cz) {
+		if( GetChunk2D(cx, cz).genereted ) return;
+		submarineGenerator.GenerateFloor(cx, cz);
 		LightComputer.ComputeSolarLighting(map, cx, cz);
 		GetChunk2D(cx, cz).genereted = true;
 	}

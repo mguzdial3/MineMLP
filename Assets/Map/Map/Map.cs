@@ -29,12 +29,6 @@ public class Map : MonoBehaviour {
 		changeList = new List<string> ();
 	}
 
-	void Update(){
-		if (Input.GetKey (KeyCode.P)) {
-			Debug.Log ("ChunkData: " + chunks.GetStringBounds () + "\n" + lightmap.GetStringBounds ());
-		}
-	}
-
 	public bool CanSave(){
 		return chunks != null;
 	}
@@ -144,6 +138,7 @@ public class Map : MonoBehaviour {
 	}
 
 	public void SetBlock(BlockData block, int x, int y, int z) {
+		//Debug.Log ("SetBlock : " + x + ", " + y + ", " + z);
 		ChunkData chunk = GetChunkDataInstance( Chunk.ToChunkPosition(x, y, z) );
 		if (chunk != null) {
 
@@ -215,11 +210,11 @@ public class Map : MonoBehaviour {
 	}
 
 	public bool IsPositionOpen(Vector3 pos){
-		return (GetBlock (pos)).IsEmpty ();
+		return (GetBlock (pos)).IsEmpty () || GetBlock(pos).IsAlpha();
 	}
 
 	public bool IsPositionOpen(Vector3i pos){
-		return (GetBlock (pos)).IsEmpty ();
+		return (GetBlock (pos)).IsEmpty ()|| GetBlock(pos).IsAlpha();
 	}
 
 	public Vector3 getEmptyLOC(Vector3 location){

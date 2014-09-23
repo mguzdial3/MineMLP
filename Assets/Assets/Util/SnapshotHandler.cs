@@ -21,7 +21,7 @@ public class SnapshotHandler : MonoBehaviour {
 	private const string MAP_UPDATE_SAVE = "MapUpdateSave";
 	private const string MAP_UPDATE_SAVE_NUMBER = "MapUpdateSaveNumber";
 
-	private const string START_OF_TEXT ="/Users/mguzdial/MineMLP/Snapshots/snapshot";
+	private const string START_OF_TEXT ="/Users/matthewguzdial/MinecraftClone/Snapshots/snapshot";
 	private const string END_OF_TEXT =".txt";
 
 	private int frames=0;
@@ -30,6 +30,10 @@ public class SnapshotHandler : MonoBehaviour {
 	private int currMapNumber;
 
 	private bool saveAllowed=true;
+
+	private int currentGeneration = 1;
+	private const int LANDMASS = 0;
+	private const int SUBMARINE = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -41,12 +45,19 @@ public class SnapshotHandler : MonoBehaviour {
 			PlayerPrefs.SetInt(MAP_UPDATE_SAVE_NUMBER,0);
 
 			string mapSaveString="";
-			while(!map.HasReachedBounds()){ //Generate the whole map
 
-				mapGenerator.SpawnMap();
-				mapSaveString += map.GetChangeString();
-				
+			switch(currentGeneration){
+				case LANDMASS:
+					while(!map.HasReachedBounds()){ //Generate the whole map
+						mapGenerator.SpawnMap();
+						mapSaveString += map.GetChangeString();
+					}
+					break;
+				case SUBMARINE:
+					mapGenerator.SpawnSubmarine();
+					break;
 			}
+
 			SpecialSave(MAP_SAVE,mapSaveString);
 			npcController.Init (map);
 

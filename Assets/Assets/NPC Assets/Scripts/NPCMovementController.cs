@@ -8,7 +8,7 @@ public class NPCMovementController : MonoBehaviour {
 	private Vector3 _currGoal;
 	private float _minDist= 1f;
 	public float speed = 5f;
-	private float maxDistance = 30f;
+	private float maxDistance = 10f;
 
 	private int maxChecksPerFrame = 100;
 

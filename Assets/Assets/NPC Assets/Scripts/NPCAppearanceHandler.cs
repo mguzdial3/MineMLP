@@ -25,7 +25,8 @@ public class NPCAppearanceHandler : MonoBehaviour {
 		bodyLookTarget = transform.rotation;
 
 		//Make it a wee bit different
-		_colorIndex = Random.Range (0, _colorOptions.Length);
+		//_colorIndex = Random.Range (0, _colorOptions.Length);
+		_colorIndex = 2;
 		bodyRenderer.material.color = _colorOptions [_colorIndex];
 	}
 

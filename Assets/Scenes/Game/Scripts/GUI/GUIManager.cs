@@ -24,7 +24,7 @@ public class GUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Screen.showCursor = false;
+		//Screen.showCursor = false;
 	}
 	
 	// Update is called once per frame
@@ -40,7 +40,7 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	void OnResume() {
-		Screen.showCursor = false;
+		//Screen.showCursor = false;
 		Screen.lockCursor = true;
 		Time.timeScale = 1f;
 	}

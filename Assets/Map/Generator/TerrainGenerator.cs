@@ -13,67 +13,23 @@ public class TerrainGenerator {
 	private Map map;
 
 	//Name
-	public static readonly string[] blockNames = new string[] {
-				"Lava",
-				"Grass",
-				"Dirt",
-				"Sand",
-				"Stone",
-				"Snow",
-				"Water",
-				"Leaves",
-				"Trunk Tree",
-				"TNT",
-				"Brick",
-				"Pumpkin",
-				"PumpkinLit",
-				"Fungus",
-				"Fungus2",
-				"Fire"
-		};
+	public static string[] blockNames;
 	public static Block[] blocks;
 
 
 	public TerrainGenerator(Map map) {
 		this.map = map;
-
-		blocks = new Block[blockNames.Length];
 		BlockSet blockSet = map.GetBlockSet();
+		blockNames = blockSet.GetStringArray ();
+		blocks = new Block[blockNames.Length];
 
 		for (int i = 0; i<blockNames.Length; i++) {
-			blocks[i] = blockSet.GetBlock(blockNames[i]);		
+			blocks[i] = blockSet.GetBlock(i);		
 		}
 
 	}
-
-
 	
 	public void Generate(int cx, int cz) {
-		/*float[,] map1 = new float[Chunk.SIZE_X+2, Chunk.SIZE_Z+2];
-		noise1.Noise(map1, cx*Chunk.SIZE_X-1, cz*Chunk.SIZE_Z-1);
-		
-		for(int z=-1; z<Chunk.SIZE_Z+1; z++) {
-			for(int x=-1; x<Chunk.SIZE_X+1; x++) {
-				int worldX = cx*Chunk.SIZE_X+x;
-				int worldZ = cz*Chunk.SIZE_Z+z;
-				int worldY = (int) (map1[x+1, z+1]*30 + 50);
-				
-				
-				for(int y=WATER_LEVEL; y>worldY; y--) {
-					map.SetBlock(new BlockData(water), worldX, y, worldZ);
-				}
-				
-				int deep = 0;
-				for(; worldY>=0; worldY--) {
-					GenerateBlock(worldX, worldY, worldZ, deep);
-					deep++;
-				}
-				
-			}
-		}*/
-		
-		
-		
 		for(int z=-1; z<Chunk.SIZE_Z+1; z++) {
 			for(int x=-1; x<Chunk.SIZE_X+1; x++) {
 				int worldX = cx*Chunk.SIZE_X+x;
@@ -112,9 +68,9 @@ public class TerrainGenerator {
 	}
 	
 	private Block GetBlock(int worldX, int worldY, int worldZ, int deep) {
-		if(deep == 0) return blocks[1];
-		if(deep <= 5) return blocks[2];
-		return blocks[4];
+		if(deep == 0) return blocks[0];
+		if(deep <= 5) return blocks[1];
+		return blocks[2];
 	}
 
 	private Block GetBlockFancy(int worldX, int worldY, int worldZ, int deep) {
