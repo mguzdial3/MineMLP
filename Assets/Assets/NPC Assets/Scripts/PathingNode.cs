@@ -27,7 +27,7 @@ public class PathingNode {
 	public override bool Equals (object obj){
 		PathingNode objNode = (PathingNode)obj;
 
-		return obj != null && objNode != null && loc.Equals(objNode.loc);
+		return obj != null && objNode != null && loc.transform.position.Equals(objNode.transform.position);
 	}
 
 	public override int GetHashCode ()

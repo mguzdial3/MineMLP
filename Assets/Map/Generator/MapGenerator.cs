@@ -79,7 +79,7 @@ public class MapGenerator : MonoBehaviour {
 			int x = UnityEngine.Random.Range(-Chunk.SIZE_X,Chunk.SIZE_X);
 			int z = UnityEngine.Random.Range(-Chunk.SIZE_Z,Chunk.SIZE_Z);
 
-			submarineGenerator.GenerateRadioactive(x,2,z);
+			submarineGenerator.GenerateRadioactive(x,1,z);
 
 			numRandomRadioactive--;	
 		}

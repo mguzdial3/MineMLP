@@ -21,7 +21,7 @@ public class SnapshotHandler : MonoBehaviour {
 	private const string MAP_UPDATE_SAVE = "MapUpdateSave";
 	private const string MAP_UPDATE_SAVE_NUMBER = "MapUpdateSaveNumber";
 
-	private const string START_OF_TEXT ="/Users/matthewguzdial/MinecraftClone/Snapshots/snapshot";
+	private const string START_OF_TEXT ="/Users/mguzdial/MineMLP/Snapshots/snapshot";
 	private const string END_OF_TEXT =".txt";
 
 	private int frames=0;

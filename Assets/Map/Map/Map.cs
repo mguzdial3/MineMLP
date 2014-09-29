@@ -155,9 +155,9 @@ public class Map : MonoBehaviour {
 					changeList.Add(""+x+" "+y+" "+z+" ERROR");
 				}
 			}
-
 			chunk.SetBlock (block, Chunk.ToLocalPosition (x, y, z));
 		}
+
 	}
 
 	public void SetBlockNoSave(Block block, int x, int y, int z) {

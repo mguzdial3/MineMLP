@@ -48,31 +48,18 @@ public class SubmarineGenerator {
 
 
 	public void GenerateRadioactive(int x, int y, int z, int deep=0) {
-		if(deep > 3) return;
-		deep++;
-		if(map.GetBlock(x, y, z).IsEmpty()) {
-			if(deep==1){
-				map.SetBlock(new BlockData(blocks[radioactive]), x, y, z);
-			}
-			else{
-				if(map.IsPositionOpen(new Vector3i(x,y,z)) && y<4){
-					map.SetBlock(new BlockData(blocks[radioactivity]), x, y, z);
-				}
-				else{
-					return;
-				}
-			}
-			GenerateRadioactive(x-1, y, z, deep);
-			GenerateRadioactive(x+1, y, z, deep);
-			
 
-			GenerateRadioactive(x, y-1, z, deep);
-			GenerateRadioactive(x, y+1, z, deep);
-			GenerateRadioactive(x, y+2, z, deep);
-			
-			GenerateRadioactive(x, y, z-1, deep);
-			GenerateRadioactive(x, y, z+1, deep);
+		map.SetBlock(new BlockData(blocks[radioactive]), x, y, z);
+
+		for(int i = x-2; i<x+3; i++){
+			for(int j = z-2; j<z+3; j++){
+
+				if((i!=x || j!=z) && ((map.GetBlock(i,y,j).block!=null && map.GetBlock(i,y,j).block.GetName()!=blocks[radioactive].GetName()))){
+					map.SetBlock(new BlockData(blocks[radioactivity]), i, y, j);
+				}
+			}
 		}
+
 	}
 
 	
