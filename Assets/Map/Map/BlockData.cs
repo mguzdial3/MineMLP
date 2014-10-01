@@ -1,4 +1,5 @@
 
+namespace Environment{
 public enum BlockDirection : byte {
 	Z_PLUS,
 	X_PLUS,
@@ -36,4 +37,5 @@ public struct BlockData {
 		return IsEmpty() || block.IsAlpha();
 	}
 	
+}
 }

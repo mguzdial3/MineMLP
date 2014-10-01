@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+using Environment;
+
 public class CrossBuilder {
 	
 	private static Vector3[] vertices = new Vector3[] {
@@ -51,7 +53,7 @@ public class CrossBuilder {
 	
 	public static void BuildCross(Vector3i localPos, Vector3i worldPos, MeshData mesh, bool onlyLight) {
 		if(!onlyLight) {
-			BuildCross((Vector3)localPos, worldPos, mesh);
+			BuildCross(new Vector3(localPos.x,localPos.y,localPos.z), worldPos, mesh);
 		}
 		BuildCrossLight( worldPos, mesh);
 	}

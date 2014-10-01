@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿namespace Environment{
 public class SubmarineGenerator {
 	private Map map;
 
@@ -63,5 +61,6 @@ public class SubmarineGenerator {
 	}
 
 	
+}
 }
 

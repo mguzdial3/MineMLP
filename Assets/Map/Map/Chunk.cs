@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Environment;
 
 public class Chunk : MonoBehaviour {
 	
@@ -21,8 +22,8 @@ public class Chunk : MonoBehaviour {
 	
 	
 	public static Chunk CreateChunk(Vector3i pos, ChunkData chunkData) {
-		GameObject go = new GameObject("("+pos.x+" "+pos.y+" "+pos.z+")  "+Map.Instance.transform.childCount);
-		go.transform.parent = Map.Instance.transform;
+		GameObject go = new GameObject("("+pos.x+" "+pos.y+" "+pos.z+")  "+SnapshotHandler.Instance.transform.childCount);
+		go.transform.parent = SnapshotHandler.Instance.transform;
 		go.transform.localPosition = new Vector3(pos.x*Chunk.SIZE_X, pos.y*Chunk.SIZE_Y, pos.z*Chunk.SIZE_Z);
 		go.transform.localRotation = Quaternion.identity;
 		go.transform.localScale = Vector3.one;

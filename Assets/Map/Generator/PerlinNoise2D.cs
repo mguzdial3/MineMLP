@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class PerlinNoise2D {
-	
 	private float scale;
 	private float persistence = 0.5f;
 	private int octaves = 5;

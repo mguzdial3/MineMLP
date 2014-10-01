@@ -1,3 +1,5 @@
+namespace Environment{
+
 public class Lightmap {
 	
 	private Grid<SunLightChunk> sunChunks = new Grid<SunLightChunk>();
@@ -177,4 +179,5 @@ class LightChunk {
 		return lights[z, y, x];
 	}
 	
+}
 }

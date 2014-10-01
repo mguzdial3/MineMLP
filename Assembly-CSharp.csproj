@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{5E521943-2360-1C2C-83E0-B559BECDC907}</ProjectGuid>
+	<ProjectGuid>{A420A66D-A48E-CDEA-F660-E8C1F1E477B9}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_4;UNITY_4_5;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_3;UNITY_4_5;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -56,6 +56,10 @@
      <Compile Include="Assets\Assets\Player\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Assets\Util\NPCController.cs" />
      <Compile Include="Assets\Assets\Util\SnapshotHandler.cs" />
+     <Compile Include="Assets\Environment\Environment.cs" />
+     <Compile Include="Assets\Environment\Map.cs" />
+     <Compile Include="Assets\Environment\MapGenerator.cs" />
+     <Compile Include="Assets\Environment\SubmarineGenerator.cs" />
      <Compile Include="Assets\Map\Builder\BuildUtils.cs" />
      <Compile Include="Assets\Map\Builder\ChunkBuilder.cs" />
      <Compile Include="Assets\Map\Builder\CrossBuilder.cs" />
@@ -65,10 +69,8 @@
      <Compile Include="Assets\Map\Data\Scripts\BlockSet.cs" />
      <Compile Include="Assets\Map\Data\Scripts\Cross.cs" />
      <Compile Include="Assets\Map\Data\Scripts\Cube.cs" />
-     <Compile Include="Assets\Map\Generator\MapGenerator.cs" />
      <Compile Include="Assets\Map\Generator\PerlinNoise2D.cs" />
      <Compile Include="Assets\Map\Generator\PerlinNoise3D.cs" />
-     <Compile Include="Assets\Map\Generator\SubmarineGenerator.cs" />
      <Compile Include="Assets\Map\Generator\TerrainGenerator.cs" />
      <Compile Include="Assets\Map\Generator\TreeGenerator.cs" />
      <Compile Include="Assets\Map\Map\BlockData.cs" />
@@ -76,7 +78,6 @@
      <Compile Include="Assets\Map\Map\ChunkData.cs" />
      <Compile Include="Assets\Map\Map\LightComputer.cs" />
      <Compile Include="Assets\Map\Map\Lightmap.cs" />
-     <Compile Include="Assets\Map\Map\Map.cs" />
      <Compile Include="Assets\Map\Utils\Grid.cs" />
      <Compile Include="Assets\Map\Utils\RayBoxCollision.cs" />
      <Compile Include="Assets\Map\Utils\Vector3i.cs" />

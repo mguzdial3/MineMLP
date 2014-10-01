@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System;
 
+namespace Environment{
 public class ChunkData {
 	private BlockData[][][] blocks = new BlockData[Chunk.SIZE_Z][][];
 	private Vector3i position;
@@ -74,4 +74,5 @@ public class ChunkData {
 
 		return singleString;
 	}
+}
 }

@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 
+
+namespace Environment{
 public class TerrainGenerator {
 	
 	private const int WATER_LEVEL = 1;
@@ -34,11 +35,18 @@ public class TerrainGenerator {
 			for(int x=-1; x<Chunk.SIZE_X+1; x++) {
 				int worldX = cx*Chunk.SIZE_X+x;
 				int worldZ = cz*Chunk.SIZE_Z+z;
-				
+
 				int h1 = (int) (noise1.Noise(worldX, worldZ)*70);//Change this to constant to make a constant map
-				h1 = Mathf.Clamp(Mathf.Abs(h1), 5, 200);
+				if(h1<0){
+					h1*=-1;	
+				}
+
+				h1 = (h1)<5? 5: (h1);
+				h1 = (h1)>300? 300: h1;
+				
 				int h2 = (int) (noise2.Noise(worldX, worldZ)*40);//Change this to constant to make a constant map
-				h2 = Mathf.Clamp(h2, 0, 200);
+				h2 = h2<0 ? 0: h2;
+				h2 = 200>h2 ? 200: h2;
 				h2 += h1;
 				
 				int deep = 0;
@@ -82,5 +90,6 @@ public class TerrainGenerator {
 		return blocks[4];
 	}
 	
+}
 }
 

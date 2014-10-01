@@ -1,4 +1,3 @@
-using UnityEngine;
 public struct Vector3i {
 	
 	public int x, y, z;
@@ -24,16 +23,16 @@ public struct Vector3i {
 		this.z = z;
 	}
 
-	public Vector3i(Vector3 loc) {
-		this.x = (int) loc.x;
-		this.y = (int) loc.y;
-		this.z = (int) loc.z;
-	}
-	
 	public Vector3i(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.z = 0;
+	}
+
+	public Vector3i(float x, float y, float z) {
+		this.x = (int)x;
+		this.y = (int)y;
+		this.z = (int)z;
 	}
 	
 	public static int DistanceSquared(Vector3i a, Vector3i b) {
@@ -45,10 +44,6 @@ public struct Vector3i {
 	
 	public int DistanceSquared(Vector3i v) {
 		return DistanceSquared(this, v);
-	}
-
-	public Vector3 ConvertToVector3(){
-		return new Vector3 (x, y, z);
 	}
 	
 	public override int GetHashCode () {
@@ -85,10 +80,6 @@ public struct Vector3i {
 	
 	public static Vector3i operator + (Vector3i a, Vector3i b) {
 		return new Vector3i( a.x+b.x, a.y+b.y, a.z+b.z);
-	}
-	
-	public static explicit operator Vector3(Vector3i v) {
-		return new Vector3(v.x, v.y, v.z);
 	}
 	
 }

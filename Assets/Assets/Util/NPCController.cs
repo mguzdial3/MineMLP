@@ -6,8 +6,6 @@ public class NPCController : MonoBehaviour {
 
 	public GameObject npcPrefab;
 	public int numToSpawn=30;
-	
-	private Map _map;
 
 	private NPCUnit[] npcs;
 	private int controlledUnit=-1;
@@ -89,8 +87,7 @@ public class NPCController : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	public void Init (Map map) {
-		_map = map;
+	public void Init () {
 		npcs = null;
 
 		npcs= new NPCUnit[numToSpawn];
@@ -105,7 +102,6 @@ public class NPCController : MonoBehaviour {
 			}
 			
 			if(npc!=null){
-				npc.SetMap(_map);
 				npc.Init();
 				
 				//Naming for ease
@@ -121,17 +117,11 @@ public class NPCController : MonoBehaviour {
 		numToSpawn = length;
 	}
 
-	public void SetMap(Map map){
-		_map = map;
-	}
-
 	public void AddNPC(int npcIndex, Vector3 position, Vector3[] path, int colorIndex){
 		GameObject go = (GameObject)Instantiate(npcPrefab);
 		NPCMovementController npc = go.GetComponent<NPCMovementController>();
 
 		if(npc!=null){
-			npc.SetMap(_map);
-			
 			npc.InitFromSave(position,path);
 
 			//Naming for ease

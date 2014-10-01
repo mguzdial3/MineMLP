@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 
 //TODO; CHANGE TO VECTOR3I
 public class PathingNode {
@@ -27,7 +26,7 @@ public class PathingNode {
 	public override bool Equals (object obj){
 		PathingNode objNode = (PathingNode)obj;
 
-		return obj != null && objNode != null && loc.transform.position.Equals(objNode.transform.position);
+		return obj != null && objNode != null && loc.Equals(objNode.loc);
 	}
 
 	public override int GetHashCode ()

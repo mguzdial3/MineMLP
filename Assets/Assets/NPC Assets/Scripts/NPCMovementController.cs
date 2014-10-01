@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Environment;
 
 public class NPCMovementController : MonoBehaviour {
 	public static string SAVE_STRING = "Movement";
@@ -11,9 +12,6 @@ public class NPCMovementController : MonoBehaviour {
 	private float maxDistance = 10f;
 
 	private int maxChecksPerFrame = 100;
-
-	//Movement Related
-	private Map _map;
 
 	//Path
 	private Vector3[] path; 
@@ -36,8 +34,8 @@ public class NPCMovementController : MonoBehaviour {
 
 		transform.position = _currGoal;
 
-		transform.position = _map.getEmptyLOC (transform.position);
-
+		Vector3i vec = Map.Instance.getEmptyLOC (new Vector3i(transform.position.x,transform.position.y,transform.position.z));
+		transform.position = new Vector3 (vec.x, vec.y, vec.z);
 		_currGoal = transform.position;
 	}
 
@@ -58,7 +56,8 @@ public class NPCMovementController : MonoBehaviour {
 
 	void Update () {
 		if(!pause){
-			if (_map.IsPositionOpen (transform.position - Vector3.up )) {
+			Vector3 pauseVec = transform.position - Vector3.up;
+			if (Map.Instance.IsPositionOpen (new Vector3i(pauseVec.x,pauseVec.y,pauseVec.z))) {
 				transform.position-=Vector3.up*Time.deltaTime;
 			}
 
@@ -100,12 +99,12 @@ public class NPCMovementController : MonoBehaviour {
 		List<PathingNode> closedSet = new List<PathingNode> ();
 		List<PathingNode> openSet = new List<PathingNode> ();
 
-		PathingNode currNode = new PathingNode ((new Vector3i(transform.position)));
+		PathingNode currNode = new PathingNode ((new Vector3i(transform.position.x,transform.position.y,transform.position.z)));
 		openSet.Add (currNode);
 
 		int count = 0;
 	
-		Vector3i goalI = new Vector3i (goal);
+		Vector3i goalI = new Vector3i (goal.x,goal.y,goal.z);
 		while (openSet.Count!=0 && count<maxChecksPerFrame) {
 			count++;
 			currNode=openSet[0];
@@ -154,12 +153,12 @@ public class NPCMovementController : MonoBehaviour {
 		List<Vector3> protoPath = new List<Vector3>();
 
 		if (goal.GetParent () == null) {
-			protoPath.Add (goal.loc.ConvertToVector3());
+			protoPath.Add (new Vector3(goal.loc.x,goal.loc.y,goal.loc.z));
 			goal = goal.GetParent();	
 		}
 		else{
 			while (goal.GetParent()!=null) {
-				protoPath.Add (goal.loc.ConvertToVector3());
+				protoPath.Add (new Vector3(goal.loc.x,goal.loc.y,goal.loc.z));
 				goal = goal.GetParent();
 			}
 		}
@@ -186,6 +185,7 @@ public class NPCMovementController : MonoBehaviour {
 		nextMoves.Add ( position + Vector3i.back);
 
 		//Go through and check to make sure all are acceptable
+		Map _map = Map.Instance;
 
 		for(int i = 0; i<nextMoves.Count; i++){
 			if(_map.IsPositionOpen(nextMoves[i]) && !_map.IsPositionOpen(nextMoves[i]+Vector3i.down)){ //Place to stand
@@ -214,10 +214,6 @@ public class NPCMovementController : MonoBehaviour {
 		_currGoal.x = (int)_currGoal.x;
 		_currGoal.y = (int)_currGoal.y;
 		_currGoal.z = (int)_currGoal.z;
-	}
-
-	public void SetMap(Map map){
-		_map = map;	
 	}
 
 	public string GetSaveString(bool hasControl, Vector3 playerPos=default(Vector3)){

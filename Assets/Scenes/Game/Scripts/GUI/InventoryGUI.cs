@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Environment;
 
 public class InventoryGUI : MonoBehaviour {
 	
@@ -10,9 +11,8 @@ public class InventoryGUI : MonoBehaviour {
 	private Vector2 scrollPosition = Vector3.zero;
 
 	// Use this for initialization
-	void Awake () {
-		Map map = (Map) GameObject.FindObjectOfType( typeof(Map) );
-		blockSet = map.GetBlockSet();
+	void Start () {
+		blockSet = Map.Instance.GetBlockSet();
 		builder = (Builder) GameObject.FindObjectOfType( typeof(Builder) );
 	}
 	

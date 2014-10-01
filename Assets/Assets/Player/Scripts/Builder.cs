@@ -1,17 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using Environment;
 
 public class Builder : MonoBehaviour {
 	
 	private Transform cameraTrans;
-	private Map map;
 	private Block selectedBlock;
 
 	private float _distanceOfRaycast=30f;
 	
 	void Awake() {
 		cameraTrans = transform.GetComponentInChildren<Camera>().transform;
-		map = (Map) GameObject.FindObjectOfType( typeof(Map) );
 	}
 	
 	public void SetSelectedBlock(Block block) {
@@ -51,21 +50,21 @@ public class Builder : MonoBehaviour {
 		if( Input.GetKeyDown(KeyCode.LeftControl) ) {
 			Vector3i? point = GetCursor(false);
 			if(point.HasValue) {
-				byte light = map.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
+				byte light = Map.Instance.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
 			}
 		}
 		
 		if( Input.GetKeyDown(KeyCode.RightControl) ) {
 			Vector3i? point = GetCursor(true);
 			if(point.HasValue) {
-				byte light = map.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
+				byte light = Map.Instance.GetLightmap().GetLight(point.Value.x, point.Value.y, point.Value.z);
 			}
 		}
 		
 		if( Input.GetMouseButtonDown(0) ) {
 			Vector3i? point = GetCursor(true);
 			if(point.HasValue) 
-				map.SetBlockAndRecompute(new BlockData(), point.Value);
+				Map.Instance.SetBlockAndRecompute(new BlockData(), point.Value);
 		}
 		
 		if( Input.GetMouseButtonDown(1) ) {
@@ -73,7 +72,7 @@ public class Builder : MonoBehaviour {
 			if(point.HasValue) {
 				BlockData block = new BlockData( selectedBlock );
 				block.SetDirection( GetDirection(-transform.forward) );
-				map.SetBlockAndRecompute(block, point.Value);
+				Map.Instance.SetBlockAndRecompute(block, point.Value);
 			}
 		}
 		
@@ -83,13 +82,13 @@ public class Builder : MonoBehaviour {
 		if(!Application.isPlaying) return;
 		Vector3i? cursor = GetCursor(true);
 		if(cursor.HasValue) {
-			Gizmos.DrawWireCube( (Vector3)cursor.Value, Vector3.one*1.05f );
+			Gizmos.DrawWireCube( new Vector3(cursor.Value.x,cursor.Value.y,cursor.Value.z), Vector3.one*1.05f );
 		}
 	}
 	
 	private Vector3i? GetCursor(bool inside) {
 		Ray ray = new Ray(cameraTrans.position, cameraTrans.forward);
-		Vector3? point =  RayBoxCollision.Intersection(map, ray, 10);
+		Vector3? point =  RayBoxCollision.Intersection(Map.Instance, ray, 10);
 		if( point.HasValue ) {
 			Vector3 pos = point.Value;
 			if(inside) pos += ray.direction*0.01f;

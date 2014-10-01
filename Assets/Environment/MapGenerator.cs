@@ -1,27 +1,26 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Threading;
 
 
-[AddComponentMenu("Map/MapGenerator")]
-public class MapGenerator : MonoBehaviour {
-	private Map map;
+namespace Environment{
+public class MapGenerator  {
+	public Map map;
 	private Grid<Chunk2D> map2D = new Grid<Chunk2D>();
 	private TerrainGenerator terrainGenerator;
 	private SubmarineGenerator submarineGenerator;
 
 	private const int ROOM_SIZE=2;//radius
 	
-	void Awake() {
-		map = GetComponent<Map>();
+	public MapGenerator(BlockSet blockset) {
+		map = new Map (blockset);
 		terrainGenerator = new TerrainGenerator(map);
 		submarineGenerator = new SubmarineGenerator (map);
+
 	}
 
-	public void SpawnMap(){
-		Vector3 pos = Camera.main.transform.position;
+	public void SpawnMap(Vector3i pos){
 		Vector3i current = Chunk.ToChunkPosition( (int)pos.x, (int)pos.y, (int)pos.z );
 		Vector3i? nearEmpty = FindNearestEmptyColumn(current.x, current.z, 7);
 		
@@ -148,4 +147,5 @@ public class MapGenerator : MonoBehaviour {
 public class Chunk2D {
 	public bool genereted = false;
 	public bool built = false;
+}
 }

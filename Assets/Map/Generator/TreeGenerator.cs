@@ -1,6 +1,5 @@
-using UnityEngine;
-using System.Collections;
 
+namespace Environment{
 public class TreeGenerator {
 	
 	private Map map;
@@ -50,8 +49,5 @@ public class TreeGenerator {
 		return 0;
 	}
 	
-	
-	
-	
-	
+}
 }

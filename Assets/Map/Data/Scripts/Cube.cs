@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Environment;
 
 public enum CubeFace {
 	Front  = 0,

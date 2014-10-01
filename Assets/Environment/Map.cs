@@ -1,26 +1,26 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[AddComponentMenu("Map/Map")]
-public class Map : MonoBehaviour {
+namespace Environment{
+
+public class Map {
 	
 	public const int maxChunkY = 16;
 	public const int maxBlockY = maxChunkY * Chunk.SIZE_Y;
 	public static string SAVE_STRING = "Map";
 	public static string CHUNK_SAVE_STRING = "Chunk";
 	
-	[SerializeField] private BlockSet blockSet;
+	private BlockSet blockSet;
 	private Grid<ChunkData> chunks = new Grid<ChunkData>();
 	private Lightmap lightmap = new Lightmap();
 
 	private List<string> changeList;
 	public static Map Instance;
-	
 
-	void Awake() {
-		ChunkBuilder.Init( blockSet.GetMaterials().Length );
+	public Map(BlockSet _blockSet) {
+		ChunkBuilder.Init( _blockSet.GetMaterials().Length );
+		this.blockSet = _blockSet;
 
 		if (Instance == null) {
 			Instance = this;		
@@ -195,9 +195,6 @@ public class Map : MonoBehaviour {
 		return GetBlock(pos.x, pos.y, pos.z);
 	}
 
-	public BlockData GetBlock(Vector3 pos) {
-		return GetBlock((int)pos.x, (int)pos.y, (int)pos.z);
-	} 
 
 	public Block GetBlockByIndex(int index){
 		return TerrainGenerator.blocks[index];
@@ -209,17 +206,13 @@ public class Map : MonoBehaviour {
 		return chunk.GetBlock( Chunk.ToLocalPosition(x, y, z) );
 	}
 
-	public bool IsPositionOpen(Vector3 pos){
+	public bool IsPositionOpen(Vector3i pos){
 		return (GetBlock (pos)).IsEmpty () || GetBlock(pos).IsAlpha();
 	}
 
-	public bool IsPositionOpen(Vector3i pos){
-		return (GetBlock (pos)).IsEmpty ()|| GetBlock(pos).IsAlpha();
-	}
-
-	public Vector3 getEmptyLOC(Vector3 location){
-		while (!IsPositionOpen(location) || ! IsPositionOpen(location-Vector3.up)) {
-			location+=Vector3.up;
+	public Vector3i getEmptyLOC(Vector3i location){
+		while (!IsPositionOpen(location) || ! IsPositionOpen(location-Vector3i.up)) {
+			location+=Vector3i.up;
 		}
 
 		return location;
@@ -233,5 +226,6 @@ public class Map : MonoBehaviour {
 		return blockSet;
 	}
 	
+}
 }
 

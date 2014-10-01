@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+namespace Environment{
 public class LightComputer {
 	
 	public const byte MIN_LIGHT = 1;
@@ -149,13 +149,10 @@ public class LightComputer {
 		int light = MIN_LIGHT;
 		foreach(Vector3i dir in Vector3i.directions) {
 			int newLight = lightmap.GetLight( pos+dir ) - STEP_LIGHT;
-			light = Mathf.Max(light, newLight);
+			light = light>newLight ?light : newLight;
 			if(light == MAX_LIGHT-STEP_LIGHT) return (byte) light;
 		}
 		return (byte) light;
 	}
-	
-	
-	
-	
+}
 }

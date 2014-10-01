@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Environment;
 
 public class CubeBuilder {
 	
@@ -103,7 +104,7 @@ public class CubeBuilder {
 			Vector3i dir = directions[i];
 			Vector3i nearPos = worldPos + dir;
 			if( IsFaceVisible(nearPos, cube) ) {
-				if(!onlyLight) BuildFace(face, cube, direction, (Vector3)localPos, mesh);
+				if(!onlyLight) BuildFace(face, cube, direction, new Vector3(localPos.x,localPos.y,localPos.z), mesh);
 				BuildFaceLight(face, worldPos, mesh);
 			}
 		}

@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Text;
 using System.IO; 
+using Environment;
 
 public class SnapshotHandler : MonoBehaviour {
 	public NPCController npcController;//We need reference to this for saving info
-	public Map map;
-	public MapGenerator mapGenerator;
+	public BlockSet blockset;
+	private MapGenerator mapGenerator;
+
+	public static SnapshotHandler Instance;
 
 	//Cheat reset
 	public bool resetSnapshot=true; //Reset the snapshot every time for now
@@ -21,7 +24,7 @@ public class SnapshotHandler : MonoBehaviour {
 	private const string MAP_UPDATE_SAVE = "MapUpdateSave";
 	private const string MAP_UPDATE_SAVE_NUMBER = "MapUpdateSaveNumber";
 
-	private const string START_OF_TEXT ="/Users/mguzdial/MineMLP/Snapshots/snapshot";
+	private const string START_OF_TEXT ="/Users/matthewguzdial/MinecraftClone/Snapshots/snapshot";
 	private const string END_OF_TEXT =".txt";
 
 	private int frames=0;
@@ -36,7 +39,12 @@ public class SnapshotHandler : MonoBehaviour {
 	private const int SUBMARINE = 1;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		if (Instance == null) {
+			Instance = this;		
+		}
+
+		mapGenerator = new MapGenerator (blockset);
 		if (resetSnapshot) {//We don't have a save
 			PlayerPrefs.SetInt(SNAPSHOT_NUMBER,0);
 
@@ -48,9 +56,10 @@ public class SnapshotHandler : MonoBehaviour {
 
 			switch(currentGeneration){
 				case LANDMASS:
-					while(!map.HasReachedBounds()){ //Generate the whole map
-						mapGenerator.SpawnMap();
-						mapSaveString += map.GetChangeString();
+					Vector3 cameraPos = Camera.main.transform.position;
+					while(!Map.Instance.HasReachedBounds()){ //Generate the whole map
+						mapGenerator.SpawnMap(new Vector3i(cameraPos.x,cameraPos.y,cameraPos.z));
+						mapSaveString += Map.Instance.GetChangeString();
 					}
 					break;
 				case SUBMARINE:
@@ -59,7 +68,6 @@ public class SnapshotHandler : MonoBehaviour {
 			}
 
 			SpecialSave(MAP_SAVE,mapSaveString);
-			npcController.Init (map);
 
 		}
 		else{
@@ -73,7 +81,7 @@ public class SnapshotHandler : MonoBehaviour {
 					LoadMap(MAP_UPDATE_SAVE+i);
 				}
 			}
-
+			Map map = Map.Instance;
 			//Lighting
 			for(int i = map.GetMinX(); i<map.GetMaxX(); i++){
 				for(int j = map.GetMinZ(); j<map.GetMaxZ(); j++){
@@ -109,7 +117,7 @@ public class SnapshotHandler : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (npcController.CanSave () && map.CanSave() && frames>=frameToSave && saveAllowed) { //For now save once per frame while we can
+		if (npcController.CanSave () && Map.Instance.CanSave() && frames>=frameToSave && saveAllowed) { //For now save once per frame while we can
 			DoSave();
 			frames=0;
 		}
@@ -121,8 +129,8 @@ public class SnapshotHandler : MonoBehaviour {
 
 		IncrementSnapshotNumber();
 
-		if (map.HasChangeString ()) {
-			string textToSave = map.GetChangeString();
+		if (Map.Instance.HasChangeString ()) {
+			string textToSave = Map.Instance.GetChangeString();
 			SaveSnapshot(MAP_UPDATE_SAVE+GetCurrentMapNumber(),textToSave);
 			IncrementMapNumber();
 			currMapNumber=GetCurrentMapNumber();
@@ -179,7 +187,6 @@ public class SnapshotHandler : MonoBehaviour {
 							string numOfEnemies = line.Substring(NPCController.SAVE_STRING.Length);
 
 							npcController.CreateNPCArray(int.Parse(numOfEnemies));
-							npcController.SetMap(map);
 						}
 						else if(line.Contains(NPCUnit.SAVE_STRING)){ //Its an NPC! Let's deal with that
 							int npcIndex=0;
@@ -330,19 +337,19 @@ public class SnapshotHandler : MonoBehaviour {
 							if(index[3][0]!='-'){
 								int block = int.Parse(index[3]);
 								if(!reverse){
-									map.SetBlockNoSave(block,x,y,z);
+									Map.Instance.SetBlockNoSave(block,x,y,z);
 								}
 								else{
-									map.SetBlockNoSave(null,x,y,z);
+									Map.Instance.SetBlockNoSave(null,x,y,z);
 								}
 							}
 							else{
 								if(!reverse){
-									map.SetBlockNoSave(null,x,y,z);
+									Map.Instance.SetBlockNoSave(null,x,y,z);
 								}
 								else{
 									int block = int.Parse(index[3].Substring(1));
-									map.SetBlockNoSave(block,x,y,z);
+									Map.Instance.SetBlockNoSave(block,x,y,z);
 								}
 							}
 						}
@@ -433,7 +440,8 @@ public class SnapshotHandler : MonoBehaviour {
 				LoadMap(MAP_UPDATE_SAVE+i);
 			}
 		}
-		
+
+		Map map = Map.Instance;
 		//Lighting
 		for(int i = map.GetMinX(); i<map.GetMaxX(); i++){
 			for(int j = map.GetMinZ(); j<map.GetMaxZ(); j++){
@@ -448,6 +456,7 @@ public class SnapshotHandler : MonoBehaviour {
 		npcController.DestroyAllNPCs ();
 
 		Load (snapshotName);
+		Map map = Map.Instance;
 
 		//Lighting
 		for(int i = map.GetMinX(); i<map.GetMaxX(); i++){
