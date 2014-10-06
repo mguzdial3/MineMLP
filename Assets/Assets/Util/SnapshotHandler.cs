@@ -122,6 +122,20 @@ public class SnapshotHandler : MonoBehaviour {
 			frames=0;
 		}
 
+		if (Input.GetKey (KeyCode.P)) {
+			int[,] twoDMap = Map.Instance.Get2DArray();		
+
+			string toPrint = "";
+			for(int i = 0; i<twoDMap.GetLength(0); i++){
+				for(int j = 0; j<twoDMap.GetLength(1); j++){
+					toPrint+=""+twoDMap[i,j]+", ";
+				}
+				toPrint+="\n";
+			}
+
+			Debug.Log (toPrint);
+		}
+
 		frames++;
 	}
 

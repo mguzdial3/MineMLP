@@ -71,7 +71,6 @@ public class MapGenerator  {
 		}
 
 		//Generate some random radioactivity
-
 		int numRandomRadioactive = 8;
 
 		while (numRandomRadioactive>0) {

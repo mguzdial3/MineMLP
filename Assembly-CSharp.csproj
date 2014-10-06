@@ -59,7 +59,10 @@
      <Compile Include="Assets\Environment\Environment.cs" />
      <Compile Include="Assets\Environment\Map.cs" />
      <Compile Include="Assets\Environment\MapGenerator.cs" />
+     <Compile Include="Assets\Environment\Osc.cs" />
+     <Compile Include="Assets\Environment\OscReceiver.cs" />
      <Compile Include="Assets\Environment\SubmarineGenerator.cs" />
+     <Compile Include="Assets\Environment\UDPPacketIO.cs" />
      <Compile Include="Assets\Map\Builder\BuildUtils.cs" />
      <Compile Include="Assets\Map\Builder\ChunkBuilder.cs" />
      <Compile Include="Assets\Map\Builder\CrossBuilder.cs" />
