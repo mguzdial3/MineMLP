@@ -50,6 +50,8 @@
 'Assets/Assets/Util/NPCController.cs'
 'Assets/Assets/Util/SnapshotHandler.cs'
 'Assets/Environment/Environment.cs'
+'Assets/Environment/Environment/AssemblyInfo.cs'
+'Assets/Environment/Environment/MyClass.cs'
 'Assets/Environment/Map.cs'
 'Assets/Environment/MapGenerator.cs'
 'Assets/Environment/Osc.cs'

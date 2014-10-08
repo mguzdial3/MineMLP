@@ -137,6 +137,11 @@ namespace Environment{
 			}
 			return chunk;
 		}
+
+		private bool HasBlockSet(){
+			return blockSet!=null;
+		}
+
 		
 		//Int Map Stuff
 		private void SetBlockIntMap(int blockId, int x, int y, int z){
@@ -191,6 +196,19 @@ namespace Environment{
 
 		public void SetBlock(BlockData block, Vector3i pos) {
 			SetBlock(block, pos.x, pos.y, pos.z);
+		}
+
+		public void SetBlock(int blockIndex, int x, int y, int z){
+			if(HasBlockSet()){
+				SetBlock(new BlockData(blockSet.GetBlock(blockIndex)),x,y,z);
+			}
+			else{
+				SetBlockIntMap(blockIndex,x,y,z);
+			}
+		}
+
+		public void SetBlock(int blockIndex, Vector3i pos){
+			SetBlock(blockIndex,pos.x,pos.y,pos.z);
 		}
 
 		public void SetBlock(BlockData block, int x, int y, int z) {
@@ -257,13 +275,19 @@ namespace Environment{
 
 
 		public Block GetBlockByIndex(int index){
-			return TerrainGenerator.blocks[index];
+			return (blockSet!=null ?blockSet.GetBlock(index): null);
 		}
 
-		public BlockData GetBlock(int x, int y, int z) {
+		 public BlockData GetBlock(int x, int y, int z) {
 			ChunkData chunk = GetChunkData( Chunk.ToChunkPosition(x, y, z) );
 			if(chunk == null) return default(BlockData);
 			return chunk.GetBlock( Chunk.ToLocalPosition(x, y, z) );
+		}
+
+		public bool CheckEquivalentBlocks(int blockIndex, int x, int y, int z){
+			BlockData blockData = GetBlock(x,y,z);
+
+			return blockData.block!=null && HasBlockSet() &&  blockData.block.GetName().Equals(blockSet.GetBlock(blockIndex).GetName());
 		}
 
 		public bool IsPositionOpen(Vector3i pos){
