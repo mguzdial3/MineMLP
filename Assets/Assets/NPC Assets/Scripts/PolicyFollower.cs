@@ -998,7 +998,8 @@ public class PolicyFollower : MonoBehaviour {
 		{-71.4570359563614, -71.48820352483504, -71.36729989551787, -71.52685920559833, 0.0},
 		{0.0, 0.0, 0.0, 0.0, 0.0}};
 
-	int currIndex=0;
+	private int currIndex=0;
+	private int currAction = 0;
 
 	private int startingIndex = 4;
 	private int groundLevel = 1;
@@ -1073,6 +1074,7 @@ public class PolicyFollower : MonoBehaviour {
 			}
 
 			if(choice!=-1){
+				currAction = choice;
 				Vector3 newPos =transform.position;
 				if(choice==0){ //Down
 					newPos+=Vector3.forward;
@@ -1106,6 +1108,16 @@ public class PolicyFollower : MonoBehaviour {
 
 		return index;
 	}
+
+	public int GetCurrentIndex(){
+		return currIndex;
+	}
+
+	public int GetCurrentAction(){
+		return currAction;
+	}
+
+
 
 
 }

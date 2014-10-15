@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scenes\Game\Scripts\GUI\GameGUI.cs" />
      <Compile Include="Assets\Scenes\Game\Scripts\GUI\InventoryGUI.cs" />
      <Compile Include="Assets\Scenes\Game\Scripts\GUI\PauseGUI.cs" />
+     <Compile Include="Assets\Scenes\Game\Scripts\GUI\PlayerInputManager.cs" />
      <None Include="Assets\Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Map\Shaders\MapAlpha.shader" />
      <None Include="Assets\Map\Shaders\Water.shader" />

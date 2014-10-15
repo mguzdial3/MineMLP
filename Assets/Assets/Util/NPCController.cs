@@ -80,9 +80,9 @@ public class NPCController : MonoBehaviour {
 
 		}
 		else{
-			if(Input.GetMouseButtonDown(0)){
-				SetControlledUnit(player.TryGetSelectedNPC());
-			}
+			//if(Input.GetMouseButtonDown(0)){
+			//	SetControlledUnit(player.TryGetSelectedNPC());
+			//}
 		}
 	}
 
