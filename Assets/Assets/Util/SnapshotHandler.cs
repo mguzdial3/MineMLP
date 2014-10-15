@@ -40,14 +40,13 @@ public class SnapshotHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		PlayerPrefs.SetInt(SNAPSHOT_NUMBER,3);
 		if (Instance == null) {
 			Instance = this;		
 		}
 
 		mapGenerator = new MapGenerator (blockset);
 		if (resetSnapshot) {//We don't have a save
-			PlayerPrefs.SetInt(SNAPSHOT_NUMBER,0);
-
 			//Map save
 			currMapNumber=0;
 			PlayerPrefs.SetInt(MAP_UPDATE_SAVE_NUMBER,0);
@@ -68,6 +67,7 @@ public class SnapshotHandler : MonoBehaviour {
 			}
 
 			SpecialSave(MAP_SAVE,mapSaveString);
+			npcController.Init();
 
 		}
 		else{

@@ -9,8 +9,7 @@ public class SubmarineGenerator {
 	private const int radioactive = 4;
 	private const int radioactivity = 5;
 
-
-	private int radioactiveRadius = 3;
+	private int radioactiveRadius = 2;
 	public SubmarineGenerator(Map map) {
 		this.map = map;
 		
@@ -22,7 +21,6 @@ public class SubmarineGenerator {
 				int worldX = cx*Chunk.SIZE_X+x;
 				int worldZ = cz*Chunk.SIZE_Z+z;
 					map.SetBlock (floorBlock, new Vector3i (worldX, 1, worldZ));
-		
 			}		
 		}
 	}
@@ -37,13 +35,11 @@ public class SubmarineGenerator {
 
 
 	public void GenerateRadioactive(int x, int y, int z, int deep=0) {
-
 		map.SetBlock(radioactive, x, y, z);
-
-		for(int i = x-2; i<x+3; i++){
-			for(int j = z-2; j<z+3; j++){
-
-				if((i!=x || j!=z) && ((map.GetBlock(i,y,j).block==null || map.CheckEquivalentBlocks(radioactive,i,y,j)))){
+		
+		for(int i = x-radioactiveRadius; i<x+1+radioactiveRadius; i++){
+			for(int j = z-radioactiveRadius; j<z+1+radioactiveRadius; j++){
+				if((i!=x || j!=z) && ((!map.CheckEquivalentBlocks(radioactive,i,y,j)))){
 					map.SetBlock(radioactivity, i, y, j);
 				}
 			}

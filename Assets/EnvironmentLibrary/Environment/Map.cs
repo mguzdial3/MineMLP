@@ -27,6 +27,8 @@ namespace Environment{
 		public readonly int zMin = -20;
 		
 
+
+
 		public Map(BlockSet _blockSet) {
 			ChunkBuilder.Init( _blockSet.GetMaterials().Length );
 			this.blockSet = _blockSet;
@@ -194,6 +196,14 @@ namespace Environment{
 			return chunks.SafeGet(pos);
 		}
 
+		public int GetBlockInt(int x, int y, int z){
+			int xIndex = x - xMin;
+			int yIndex = y - yMin;
+			int zIndex = z - zMin;
+
+			return intMap[xIndex,yIndex,zIndex];
+		}
+
 		public void SetBlock(BlockData block, Vector3i pos) {
 			SetBlock(block, pos.x, pos.y, pos.z);
 		}
@@ -215,9 +225,6 @@ namespace Environment{
 			//Debug.Log ("SetBlock : " + x + ", " + y + ", " + z);
 			ChunkData chunk = GetChunkDataInstance( Chunk.ToChunkPosition(x, y, z) );
 			if (chunk != null) {
-
-
-
 				if(block.block!=null){
 					SetBlockIntMap(Array.IndexOf(TerrainGenerator.blockNames,block.block.GetName()),x,y,z);
 					changeList.Add(""+x+" "+y+" "+z+" "+Array.IndexOf(TerrainGenerator.blockNames,block.block.GetName()));
@@ -264,8 +271,9 @@ namespace Environment{
 
 		public void SetBlockNoSave(int block, int x, int y, int z) {
 			SetBlockNoSave (GetBlockByIndex (block), x, y, z);
-		}
+			SetBlockIntMap(block,x,y,z);
 
+		}
 
 
 
@@ -286,8 +294,7 @@ namespace Environment{
 
 		public bool CheckEquivalentBlocks(int blockIndex, int x, int y, int z){
 			BlockData blockData = GetBlock(x,y,z);
-
-			return blockData.block!=null && HasBlockSet() &&  blockData.block.GetName().Equals(blockSet.GetBlock(blockIndex).GetName());
+			return (blockData.block!=null && HasBlockSet() &&  blockData.block.GetName().Equals(blockSet.GetBlock(blockIndex).GetName()));
 		}
 
 		public bool IsPositionOpen(Vector3i pos){

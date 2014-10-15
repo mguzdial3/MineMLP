@@ -50,6 +50,7 @@
      <Compile Include="Assets\Assets\NPC Assets\Scripts\NPCMovementController.cs" />
      <Compile Include="Assets\Assets\NPC Assets\Scripts\NPCUnit.cs" />
      <Compile Include="Assets\Assets\NPC Assets\Scripts\PathingNode.cs" />
+     <Compile Include="Assets\Assets\NPC Assets\Scripts\PolicyFollower.cs" />
      <Compile Include="Assets\Assets\Player\Scripts\Builder.cs" />
      <Compile Include="Assets\Assets\Player\Scripts\CharacterMotor.cs" />
      <Compile Include="Assets\Assets\Player\Scripts\FPSInputController.cs" />

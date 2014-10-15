@@ -36,4 +36,8 @@ public class NPCUnit : MonoBehaviour {
 		movementController.SetCurrGoal (goal);
 	}
 
+	void OnTriggerEnter(Collider other){
+		transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+	}
+
 }
