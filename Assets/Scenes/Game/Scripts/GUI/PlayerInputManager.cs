@@ -9,6 +9,8 @@ public class PlayerInputManager : MonoBehaviour {
 	public string feedbackDescriptor = "Test";
 
 	public PolicyFollower policyFollower;
+	private double changeAmount = 100;
+
 
 	void Start(){
 		if(policyFollower==null){
@@ -23,10 +25,12 @@ public class PlayerInputManager : MonoBehaviour {
 		GUI.skin.button.fontSize = 30;
 		if(GUI.Button(new Rect(Screen.width-100,0,100,100),"+")){
 			changeList+="CurrState: "+policyFollower.GetCurrentIndex()+". CurrAction: "+policyFollower.GetCurrentAction()+". Feedback: Yes\n";
+			policyFollower.ChangeCurrActionPolicy(changeAmount);
 		}
 
 		if(GUI.Button(new Rect(Screen.width-100,100,100,100),"-")){
 			changeList+="CurrState: "+policyFollower.GetCurrentIndex()+". CurrAction: "+policyFollower.GetCurrentAction()+". Feedback: No\n";
+			policyFollower.ChangeCurrActionPolicy(-1*changeAmount);
 		}
 
 
